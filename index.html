@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Card RPG</title>
+        <link rel="stylesheet" href="styles/global.css">
+        <style>
+            button {
+                background-color: var(--sec-back);
+                color:var(--text);
+                border:none;
+                border-radius: 25px;
+                padding:15px;
+            }
+            button:hover{
+                cursor: pointer;
+            }
+            .rad-div {
+                margin: 5px;
+                width:400px;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="content" class="center">
+            <h1>Card RPG</h1>
+            <div class="rad-div">
+                <p>A simple party game where the objective is to eliminate your opponents.</p>
+                <p>Each round, you say what you wish to do, and a card is drawn. If the card is high, your wish is granted.
+                Otherwise, who knows what'll happen to you!</p>
+            </div>
+            <div class="rad-div">
+                Instructions
+                <ol>
+                    <li>Input every players name or character name</li>
+                    <li>Appoint a "narrator" to get the game going</li>
+                    <li>Each player then says what they want to do each round</li>
+                    <li>Draw a card. The higher the cards number, the closer the reality is to your wish. The narrator will input what happens each round.</li>
+                    <li>Make sure each action follows an overarching narrative</li>
+                    <li>Play until only one player remains. Eliminate your opponents!</li>
+                </ol>
+            </div>
+            <a href="singleplayer.html" style="margin:5px;"><button class="center large">Play</button></a>
+        </div>
+    </body>
+</html>

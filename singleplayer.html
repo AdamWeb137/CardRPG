@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Card RPG</title>
+        <link rel="stylesheet" href="styles/global.css">
+        <link rel="stylesheet" href="styles/single_player.css">
+        <script src="scripts/rad.max.js"></script>
+        <script src="scripts/structs.js"></script>
+        <script src="scripts/gamelogic.js"></script>
+    </head>
+    <body>
+        <div id="content" class="center">
+            <h1>Card RPG</h1>
+            <rad-ial scope="new_action">
+                <div class="new_action" rad-if="((can_render))">
+                    <div rad-if="((eqs,mode,'draw'))" class="flex fc">
+                        <button class="large player_name_btn" [[click,change_mode,'add']]>Draw Card for ((clean,player.name))</button>
+                    </div>
+                    <div rad-if="((eqs,mode,'add'))">
+                        <div class="flex fc fnw fp">
+                            <p>Card:</p>
+                            <p>{{card_desc}} of {{card_type}}</p>
+                            <img class="card_thumb" src="media/{{card_type}}.png" style="background-color: {{card_back}};">
+                            <p>({{luck}})</p>
+                        </div>
+                        <div class="flex fc fnw fp">
+                            <p>Kill Off:</p>
+                            <select bind-var="kill_off" name="kill_off">((get_select))</select>
+                        </div>
+                        <div class="flex fc fnw fp">
+                            <p style="color:{{player.color}};" class="large player_name">((clean,player.name))</p>
+                            <input style="display: block;" bind-var="action_desc">
+                            <button [[click,add_action]]>Submit</button>
+                        </div>
+                    </div>
+                </div>
+            </rad-ial>
+            <rad-ial scope="winner">
+                <div rad-if="((neqs,game_info.winner,false))" class="rad-div">
+                    <h2 class="center" style="margin-top: 5px; margin-bottom: 5px;">((clean,game_info.winner)) wins!</h2>
+                    <button class="center" style="display: block;" [[click,play_again_new]]>Play Again With New Characters</button>
+                    <br>
+                    <button class="center" style="display: block;" [[click,play_again_old]]>Play Again With Same Characters</button>
+                </div>
+            </rad-ial>
+            <rad-ial scope="create_players">
+                <div rad-if="((eqs,game_info.created_players,false))" class="rad-div">
+                    <div class="flex fnw fc fp">
+                        <p>New player:</p>
+                        <input bind-var="name" placeholder="John">
+                        <button [[click,add_player]]>Add</button>
+                    </div>
+                    <div class="flex fnw fc fp" rad-if="((>=,players.length,2))">
+                        <p>or</p>
+                        <button [[click,start_game]]>Thats all of them thank you</button>
+                    </div>
+                    <div rad-if="((>=,players.length,1))" class="flex fw fc">
+                        <template loop="{{players}}" loop-var="player">
+                            <div class="player_li">((clean,player.name))</div>
+                        </template>
+                    </div>
+                </div>
+            </rad-ial>
+            <rad-ial scope="actions">
+                <div rad-if="((not_empty,actions))" class="actions_loop">
+                    <template loop="{{actions}}" loop-var="action">
+                        <div class="flex fnw action">
+                            <p style="color:((dead_or_alive,action,'name'));" class="large player_name">((clean,action.player.name))</p>
+                            <div class="action_desc">
+                                <p style="color:((dead_or_alive,action,'desc'))">((clean,action.description))</p>
+                            </div>
+                        </div>
+                    </template>
+                </div>
+            </rad-ial>
+        </div>
+    </body>
+</html>
